@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script src="./tailwind_v405.js"></script>
+    <script src="./popup.js"></script>
+
+    <title>Document</title>
+    <style>
+      * {
+        user-select: none;
+        -webkit-user-select: none;
+        -moz-user-select: none;
+        -ms-user-select: none;
+        -webkit-user-drag: none;
+      }
+
+      @keyframes float {
+        0%,
+        100% {
+          transform: translateY(0);
+        }
+        50% {
+          transform: translateY(-10px);
+        }
+      }
+      .float-updown {
+        animation: float 2s ease-in-out infinite;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="absolute origin-right w-[10%] m-2">
+      <a href="settings.html">
+        <img
+          src="images/settings.png"
+          alt="Slime animation"
+          class=""
+          draggable="false"
+        />
+      </a>
+    </div>
+    <div class="flex flex-col items-center justify-center h-100 w-100">
+      <!--TEXT BUBBLE-->
+
+      <div
+        id="text-bubble"
+        class="absolute mb-100 px-7 py-5 m-10 bg-black mt-70 rounded-md text-white border-3 border-white drop-shadow-lg"
+      >
+        You took damage!
+      </div>
+
+      <!--HEALTH BUBBLE-->
+      <div class="absolute mt-25 origin-left mr-20">
+        <div class="mt-40">
+          <h1 class="bg-black/40 text-white rounded-md px-2 py-0.5">
+            <b>Slime Buddy</b>
+          </h1>
+          <div
+            class="bg-red-400 border-red-950 border-3 h-5 w-50 rounded-full absolute"
+          ></div>
+          <div
+            id="health-green"
+            class="bg-green-300 border-green-950 border-3 h-5 w-25 rounded-full absolute"
+          ></div>
+        </div>
+      </div>
+      <img
+        src="images/slime.gif"
+        alt="Slime animation"
+        class="w-[30%] mt-25"
+        draggable="false"
+      />
+    </div>
+
+    <div
+      class="fixed inset-0 bg-[url('/images/night.png')] bg-cover bg-center -z-10"
+    ></div>
+  </body>
+</html>

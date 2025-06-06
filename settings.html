@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <script src="./tailwind_v405.js"></script>
+    <script src="settings.js"></script>
+    <style>
+      * {
+        user-select: none;
+        -webkit-user-select: none;
+        -moz-user-select: none;
+        -ms-user-select: none;
+        -webkit-user-drag: none;
+      }
+
+      @font-face {
+        font-family: "Neue Haas Grotesk Display";
+        src: url("/fonts/NeueHaasDisplayThin.ttf") format("truetype");
+        font-weight: 100;
+        font-style: normal;
+        font-display: swap;
+      }
+
+      @font-face {
+        font-family: "Neue Haas Grotesk Display";
+        src: url("/fonts/NeueHaasDisplayBold.ttf") format("truetype");
+        font-weight: 900;
+        font-style: normal;
+        font-display: swap;
+      }
+
+      h1 {
+        font-weight: 900;
+        font-size: 2rem;
+      }
+
+      body {
+        font-family: "Neue Haas Grotesk Display", sans-serif;
+      }
+    </style>
+  </head>
+
+  <body>
+    <div class="flex flex-col items-center h-100 w-100 m-5 space-y-5">
+      <h1>Work Buddy Settings</h1>
+      <div>
+        <h2>Add Unproductive URLs</h2>
+        <input
+          type="text"
+          id="urlInput"
+          placeholder="New URL Name"
+          class="bg-gray-200 p-2"
+        />
+        <button
+          id="addUrlButton"
+          class="bg-black text-white p-2 rounded-md transition-bg hover:bg-sky-400 duration-300 transition-text hover:text-black duration-300 cursor-pointer"
+        >
+          Add
+        </button>
+      </div>
+
+      <h2>Unproductive URLs:</h2>
+      <ul id="urlList"></ul>
+      <!-- <div
+        class="fixed inset-0 bg-[url('/images/night.png')] bg-cover bg-center -z-10"
+      ></div> -->
+    </div>
+  </body>
+</html>
