@@ -1,5 +1,3 @@
-Absolutely! Here's the entire README in markdown, fully formatted and ready to copy:
-
 # 🧪 Work Slime – Productivity Pet Extension
 
 **Work Slime** is your adorable productivity companion! Set your maximum unproductive time, add distracting URLs, and watch your slime stay healthy—unless you waste time 👀. Every moment on a blocked site drains your slime’s health… keep it alive!
