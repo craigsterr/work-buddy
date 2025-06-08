@@ -32,7 +32,7 @@
 
     ⚠️ Temporary add-ons will be removed when Firefox restarts.
 
-Chrome (if supported)
+Chrome
 
     Go to:
 
