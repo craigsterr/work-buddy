@@ -1,11 +1,12 @@
 {
-  "manifest_version": 3,
+  "manifest_version": 2,
   "name": "Pet Productivity Tracker",
   "version": "1.0",
   "description": "Your pet loses health when you waste time!",
   "permissions": ["tabs", "storage", "scripting", "activeTab", "notifications"],
   "background": {
     "scripts": ["background.js"]
+      "persistent": true
   },
   "action": {
     "default_popup": "popup.html",
