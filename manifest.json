@@ -5,7 +5,7 @@
   "description": "Your pet loses health when you waste time!",
   "permissions": ["tabs", "storage", "scripting", "activeTab", "notifications"],
   "background": {
-    "scripts": ["background.js"]
+    "scripts": ["background.js"],
       "persistent": true
   },
   "action": {
