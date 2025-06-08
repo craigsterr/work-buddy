@@ -32,18 +32,6 @@
 
     ⚠️ Temporary add-ons will be removed when Firefox restarts.
 
-Chrome
-
-    Go to:
-
-    chrome://extensions
-
-    Enable Developer mode in the top-right.
-
-    Click "Load unpacked"
-
-    Select the extension's folder.
-
 ⚙️ How to Use
 
     Click the Work Slime icon in your extensions bar.
