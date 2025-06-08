@@ -30,14 +30,18 @@ function renderUrlList() {
     listItem.addEventListener("click", (e) => {
       e.stopPropagation(); // Prevent li click
       urlList.splice(urlList.indexOf(url), 1);
-      localStorage.setItem("urlList", JSON.stringify(urlList));
+      browser.storage.local.set({ urlList });
+      browser.runtime.sendMessage({ type: "reloadUrlList" });
+
       renderUrlList();
     });
 
     removeSpan.addEventListener("click", (e) => {
       e.stopPropagation(); // Prevent li click
       urlList.splice(urlList.indexOf(url), 1);
-      localStorage.setItem("urlList", JSON.stringify(urlList));
+      browser.storage.local.set({ urlList });
+      browser.runtime.sendMessage({ type: "reloadUrlList" });
+
       renderUrlList();
     });
 
@@ -45,15 +49,76 @@ function renderUrlList() {
     urlListElement.appendChild(listItem);
   });
 }
-document.addEventListener("DOMContentLoaded", () => {
+
+function msToHMS(ms) {
+  const totalSeconds = Math.floor(ms / 1000);
+  const hours = Math.floor(totalSeconds / 3600);
+  const minutes = Math.floor((totalSeconds % 3600) / 60);
+  const seconds = totalSeconds % 60;
+  return (
+    (hours > 0 ? hours + "h " : "") +
+    (minutes > 0 ? minutes + "m " : "") +
+    seconds +
+    "s"
+  );
+}
+
+let maxTimeMs = null;
+
+// Upon popup opening
+document.addEventListener("DOMContentLoaded", async () => {
+  // Ids for max time input fields and button
+  const setMaxTime = document.getElementById("setMaxTime");
+  const hoursInput = document.getElementById("hours");
+  const minutesInput = document.getElementById("minutes");
+  const secondsInput = document.getElementById("seconds");
+
+  const { maxSecs } = await browser.storage.local.get("maxSecs");
+  if (maxSecs) {
+    const maxTimeText = document.getElementById("max-time");
+    maxTimeText.textContent = msToHMS(maxSecs * 1000);
+  }
+
+  // Click on max time add button
+  setMaxTime.addEventListener("click", () => {
+    const response = confirm(
+      "Warning: Setting a new max time will overwrite your current session progress. Proceed?"
+    );
+
+    // If the user presses confirm
+    if (response) {
+      const hours = parseInt(hoursInput.value || 0);
+      const minutes = parseInt(minutesInput.value || 0);
+      const seconds = parseInt(secondsInput.value || 0);
+
+      if (minutes <= 59 && seconds <= 59) {
+        // Convert to milliseconds
+        let maxTimeMs = 1000 * (hours * 60 * 60 + minutes * 60 + seconds);
+        const maxTimeText = document.getElementById("max-time");
+        maxTimeText.textContent = msToHMS(maxTimeMs);
+        const maxSecs = maxTimeMs / 1000;
+        browser.storage.local.set({ maxSecs: maxSecs });
+        browser.runtime.sendMessage({ type: "updateMaxSecs" });
+      } else {
+        if (minutes > 59) alert("Minutes must be less than 60");
+        if (seconds > 59) alert("Seconds must be less than 60");
+      }
+
+      hoursInput.value = "";
+      minutesInput.value = "";
+      secondsInput.value = "";
+    }
+  });
+
   const urlInput = document.getElementById("urlInput");
   const addUrlButton = document.getElementById("addUrlButton");
 
-  const savedUrls = localStorage.getItem("urlList");
-  if (savedUrls) {
-    urlList = JSON.parse(savedUrls); // Load saved URLs from localStorage
-    renderUrlList(); // Render the list on page load
-  }
+  browser.storage.local.get("urlList").then((result) => {
+    urlList = result.urlList || [];
+    browser.runtime.sendMessage({ type: "reloadUrlList" });
+
+    renderUrlList();
+  });
 
   addUrlButton.addEventListener("click", () => {
     const url = normalizeUrl(urlInput.value);
@@ -68,7 +133,8 @@ document.addEventListener("DOMContentLoaded", () => {
 
     renderUrlList();
 
-    localStorage.setItem("urlList", JSON.stringify(urlList));
+    browser.storage.local.set({ urlList });
+    browser.runtime.sendMessage({ type: "reloadUrlList" });
   });
 
   addEventListener("keydown", (event) => {
@@ -85,7 +151,8 @@ document.addEventListener("DOMContentLoaded", () => {
 
       renderUrlList();
 
-      localStorage.setItem("urlList", JSON.stringify(urlList));
+      browser.storage.local.set({ urlList });
+      browser.runtime.sendMessage({ type: "reloadUrlList" });
     }
   });
 });

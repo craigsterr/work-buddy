@@ -43,29 +43,78 @@
   </head>
 
   <body>
+    <div class="absolute origin-right m-3">
+      <a
+        id="back"
+        class="bg-black text-white p-2 rounded-md transition-bg hover:bg-sky-400 duration-300 transition-text hover:text-black duration-300 cursor-pointer"
+        href="popup.html"
+        >
+            Back
+    </a>
+    </div>
+
     <div class="flex flex-col items-center h-100 w-100 m-5 space-y-5">
       <h1>Work Buddy Settings</h1>
-      <div>
-        <h2>Add Unproductive URLs</h2>
-        <input
-          type="text"
-          id="urlInput"
-          placeholder="New URL Name"
-          class="bg-gray-200 p-2"
-        />
-        <button
-          id="addUrlButton"
-          class="bg-black text-white p-2 rounded-md transition-bg hover:bg-sky-400 duration-300 transition-text hover:text-black duration-300 cursor-pointer"
-        >
-          Add
-        </button>
+      <div class="space-y-5">
+        <div>
+          <h2>Max Time Waste:</h2>
+          <div class="flex flex-row space-x-2">
+            <input
+              type="number"
+              min="0"
+              id="hours"
+              placeholder="hrs"
+              class="bg-gray-200 p-2 w-17"
+            />
+            <input
+              type="number"
+              min="0"
+              max="59"
+              id="minutes"
+              placeholder="mins"
+              class="bg-gray-200 p-2 w-17"
+            />
+            <input
+              type="number"
+              min="0"
+              max="59"
+              id="seconds"
+              placeholder="secs"
+              class="bg-gray-200 p-2 w-17"
+            />
+
+            <button
+              id="setMaxTime"
+              class="bg-black text-white p-2 rounded-md transition-bg hover:bg-sky-400 duration-300 transition-text hover:text-black duration-300 cursor-pointer"
+            >
+              Set
+            </button>
+          </div>
+
+          <div class="flex flex-row space-x-1">
+            <h2>Max time waste:</h1>
+            <p id="max-time">None</p>
+          </div>
+        </div>
+        <div class="space-x-1">
+          <h2>Add Unproductive URLs</h2>
+          <input
+            type="text"
+            id="urlInput"
+            placeholder="New URL Name"
+            class="bg-gray-200 p-2"
+          />
+          <button
+            id="addUrlButton"
+            class="bg-black text-white p-2 rounded-md transition-bg hover:bg-sky-400 duration-300 transition-text hover:text-black duration-300 cursor-pointer"
+          >
+            Add
+          </button>
+        </div>
       </div>
 
       <h2>Unproductive URLs:</h2>
       <ul id="urlList"></ul>
-      <!-- <div
-        class="fixed inset-0 bg-[url('/images/night.png')] bg-cover bg-center -z-10"
-      ></div> -->
     </div>
   </body>
 </html>
